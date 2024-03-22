@@ -30,8 +30,7 @@ router.get("/getEmp", (req, res) => {
 
 //get emp by id
 router.get("/getEmp/:id", (req, res) => {
-  const uId = req.params.id;
-  console.log(uId);
+  const uId = req.params.id; 
   const tableName = "Employee_Details";
   const dbConnection = req.dbConnection;
   const query = `SELECT * FROM ${tableName} WHERE id =${uId} `;
