@@ -5,7 +5,6 @@ const router = express.Router();
 router.use((req, res, next) => {
   // Access the database connection from the request object
   const dbConnection = req.dbConnection;
-
   // Attach the database connection to the request object for use in subsequent route handlers
   req.dbConnection = dbConnection;
   next();
@@ -14,7 +13,7 @@ router.use((req, res, next) => {
 //getting all emp
 router.get("/getEmp", (req, res) => {
   const tableName = "Employee_Details";
-  const dbConnection = req.dbConnection;
+  const dbConnection = req.dbConnection; 
   const query = `SELECT * FROM ${tableName} `;
 
   dbConnection.query(query, (err, result) => {
@@ -156,13 +155,13 @@ router.patch("/updateEmpDetails/:id", (req, res) => {
     UPDATE ${tableName} 
     SET ${updates.join(", ")} 
     WHERE id = ${uId};
-  `;
+  `; 
 
   // Execute the SQL query
   dbConnection.query(query, (err, result) => {
     if (err) {
       //console.error("Error when updating data:", err);
-      return res.status(500).send("Error when updating data");
+      return res.status(404).send("No user found with the specified ID"); 
     } else {
       //console.log("Employee updated successfully");
       return res.status(200).send("Employee updated successfully");
